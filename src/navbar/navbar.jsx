@@ -1,45 +1,47 @@
-import "../styles.css";
 function Navbar() {
   return (
     <div className="navbar bg-base-100 shadow-sm">
-      <div className="flex-none">
-        <button className="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-5 w-5 stroke-current"
-          >
-            {" "}
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>{" "}
-          </svg>
-        </button>
-      </div>
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-3xl">Infonesia</a>
       </div>
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-5 w-5 stroke-current"
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar w-13 h-13 mr-4"
           >
-            {" "}
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path>{" "}
-          </svg>
-        </button>
+            <img
+              src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+              alt="Avatar"
+              className="ring ring-success ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2"
+            />
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li
+              onClick={() => document.getElementById("my_modal_2").showModal()}
+            >
+              <a>Profil</a>
+            </li>
+            <li>
+              <a href="https://restcountries.com/" target="_blank">
+                Sumber Data
+              </a>
+            </li>
+          </ul>
+          <dialog id="my_modal_2" className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Hello!</h3>
+              <p className="py-4">Press ESC key or click outside to close</p>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
+        </div>
       </div>
     </div>
   );

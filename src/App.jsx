@@ -54,34 +54,48 @@ function App() {
         </label>
       </div>
       <div className="flex flex-wrap justify-center gap-4 mb-4">
-        {NegaraPerHalaman.map((item) => (
-          <div
-            onClick={() => {
-              datadetail(item.name.common);
-              document.getElementById("modaldetailnegara").showModal();
-            }}
-            key={item.name.common}
-            className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
-          >
-            <figure>
-              <img
-                src={item.flags.png}
-                alt="Shoes"
-                className="w-full h-[200px] object-cover border-1 border-gray-300"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{item.name.common}</h2>
-              <p>
-                Jumlah Populasi: {item.population.toLocaleString("id-ID")} Jiwa
-              </p>
-              <p>
-                Letak Negara: {item.region}, {item.subregion}
-              </p>
-              <p>Ibu Kota: {item.capital}</p>
-            </div>
+        {NegaraPerHalaman.length === 0 ? (
+          <div className="flex flex-wrap gap-4 justify-center mb-4">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div key={i} className="flex w-80 flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          NegaraPerHalaman.map((item) => (
+            <div
+              onClick={() => {
+                datadetail(item.name.common);
+                document.getElementById("modaldetailnegara").showModal();
+              }}
+              key={item.name.common}
+              className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
+            >
+              <figure>
+                <img
+                  src={item.flags.png}
+                  alt="Shoes"
+                  className="w-full h-[200px] object-cover border-1 border-gray-300"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{item.translations.ind.common}</h2>
+                <p>
+                  Jumlah Populasi: {item.population.toLocaleString("id-ID")}{" "}
+                  Jiwa
+                </p>
+                <p>
+                  Letak Negara: {item.region}, {item.subregion}
+                </p>
+                <p>Ibu Kota: {item.capital}</p>
+              </div>
+            </div>
+          ))
+        )}
       </div>
       <br />
       <div className="flex justify-center items-center">
@@ -152,9 +166,9 @@ function App() {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">
-                  <p>{DetailNegara.name.common}</p>
+                  <p>{DetailNegara.translations.ind.common}</p>
                 </h2>
-                <p>Nama Resmi: {DetailNegara.name.official}</p>
+                <p>Nama Resmi: {DetailNegara.translations.ind.official}</p>
                 <p>
                   Jumlah Populasi:{" "}
                   {DetailNegara.population.toLocaleString("id-ID")} Jiwa
