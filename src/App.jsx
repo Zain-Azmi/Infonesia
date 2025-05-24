@@ -8,7 +8,7 @@ function App() {
 
   const fetchData = () => {
     axios
-      .get("https://restcountries.com/v3.1/all")
+      .get("https://restcountries.com/v3.1/independent?status=true")
       .then((res) => {
         setDataNegara(res.data);
       })
@@ -58,22 +58,26 @@ function App() {
           <div
             onClick={() => {
               datadetail(item.name.common);
-              document.getElementById("my_modal_2").showModal();
+              document.getElementById("modaldetailnegara").showModal();
             }}
             key={item.name.common}
-            className="card bg-base-100 w-80 shadow-sm"
+            className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
           >
             <figure>
               <img
                 src={item.flags.png}
                 alt="Shoes"
-                className="w-full h-[200px] object-cover"
+                className="w-full h-[200px] object-cover border-1 border-gray-300"
               />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{item.name.common}</h2>
-              <p>Jumlah Populasi: {item.population.toLocaleString("id-ID")}</p>
-              <p>Benua: {item.region}</p>
+              <p>
+                Jumlah Populasi: {item.population.toLocaleString("id-ID")} Jiwa
+              </p>
+              <p>
+                Letak Negara: {item.region}, {item.subregion}
+              </p>
               <p>Ibu Kota: {item.capital}</p>
             </div>
           </div>
@@ -135,24 +139,43 @@ function App() {
           )}
         </div>
       </div>
-      <dialog id="my_modal_2" className="modal">
+      <dialog id="modaldetailnegara" className="modal">
         {DetailNegara && (
           <div className="modal-box">
             <h3 className="font-bold text-lg">Informasi Negara</h3>
             <div className="card bg-base-100 mt-4 ">
               <figure>
-                <img src={DetailNegara.flags.png} />
+                <img
+                  src={DetailNegara.flags.png}
+                  className="border-1 border-gray-300"
+                />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">
                   <p>{DetailNegara.name.common}</p>
                 </h2>
+                <p>Nama Resmi: {DetailNegara.name.official}</p>
                 <p>
                   Jumlah Populasi:{" "}
-                  {DetailNegara.population.toLocaleString("id-ID")}
+                  {DetailNegara.population.toLocaleString("id-ID")} Jiwa
                 </p>
-                <p>Benua: {DetailNegara.region}</p>
+                Letak Negara: {DetailNegara.region}, {DetailNegara.subregion}
                 <p>Ibu Kota: {DetailNegara.capital?.[0]}</p>
+                <p>
+                  Bahasa:{" "}
+                  {Object.values(DetailNegara.languages || {}).join(", ")}
+                </p>
+                <p>
+                  Mata Uang:{" "}
+                  {Object.values(DetailNegara.currencies || {})
+                    .map((cur) => `${cur.name} (${cur.symbol})`)
+                    .join(", ")}
+                </p>
+                <p>Zona Waktu: {DetailNegara.timezones?.join(", ")}</p>
+                <p>
+                  Luas Wilayah: {DetailNegara.area.toLocaleString("id-ID")} km²
+                </p>
+                <p>Kode Negara: {DetailNegara.cca2}</p>
               </div>
             </div>
           </div>
