@@ -12,7 +12,7 @@ function Navbar() {
             className="btn btn-ghost btn-circle avatar w-13 h-13 mr-4"
           >
             <img
-              src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+              src="/bebek.gif"
               alt="Avatar"
               className="ring ring-success ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2"
             />
@@ -32,11 +32,16 @@ function Navbar() {
           </ul>
           <dialog id="Profil" className="modal">
             <div className="modal-box  w-xs">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
               <h3 className="font-bold text-lg">Profil</h3>
               <div className="card bg-base-100 mt-4 ">
                 <div className="flex justify-center items-center">
                   <img
-                    src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                    src="/bebek.gif"
                     alt="Avatar"
                     className="ring ring-success ring-offset-base-100 w-26 rounded-full ring-2 ring-offset-2"
                   />

@@ -4,6 +4,7 @@ function App() {
   const [DataNegara, setDataNegara] = useState([]);
   const [HalamanAktif, setHalamanAktif] = useState(1);
   const [DetailNegara, setDetailNegara] = useState(null);
+  const [InputSearch, setInputSearch] = useState("");
   const JumlahNegaraPerHalaman = 20;
 
   const ambilData = () => {
@@ -19,13 +20,19 @@ function App() {
     ambilData();
   }, []);
 
-  const JumlahHalaman = Math.ceil(DataNegara.length / JumlahNegaraPerHalaman);
+  const carinegara =
+    InputSearch.trim() === ""
+      ? DataNegara.filter((item) => item.translations.ind?.common)
+      : DataNegara.filter((item) => {
+          const nama = item.translations.ind?.common;
+          return nama && nama.toLowerCase().includes(InputSearch.toLowerCase());
+        });
+  const JumlahHalaman = Math.ceil(carinegara.length / JumlahNegaraPerHalaman);
   const IDNegara = (HalamanAktif - 1) * JumlahNegaraPerHalaman;
-  const NegaraPerHalaman = DataNegara.slice(
+  const NegaraPerHalaman = carinegara.slice(
     IDNegara,
     IDNegara + JumlahNegaraPerHalaman
   );
-
   const datadetail = (namanegara) => {
     setDetailNegara(null);
     axios
@@ -35,11 +42,10 @@ function App() {
       })
       .catch((err) => console.error("Gagal Mengambil Data Negara:", err));
   };
-
   return (
     <>
       <div className="flex justify-center items-center h-[150px]">
-        <label className="input border-4 border-gray-300 rounded-full flex items-center p-2  w-[500px]">
+        <label className="focus:outline-none focus-within:outline-none input border-4 border-gray-300 rounded-full flex items-center focus:box-shadow-none  w-xs">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,13 +62,19 @@ function App() {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" className="grow" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Cari Negara..."
+            className="input w-xs focus:outline-none focus-within:outline-none"
+            value={InputSearch}
+            onChange={(e) => setInputSearch(e.target.value)}
+          />
         </label>
       </div>
       <div className="flex flex-wrap justify-center gap-4 mb-4">
         {NegaraPerHalaman.length === 0 ? (
           <div className="flex flex-wrap gap-4 justify-center mb-4">
-            {Array.from({ length: 20 }).map((_, i) => (
+            {Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
               <div key={i} className="flex w-80 flex-col gap-4">
                 <div className="skeleton h-32 w-full"></div>
                 <div className="skeleton h-4 w-28"></div>
@@ -162,6 +174,11 @@ function App() {
       <dialog id="modaldetailnegara" className="modal">
         {DetailNegara && (
           <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
             <h3 className="font-bold text-lg">Informasi Negara</h3>
             <div className="card bg-base-100 mt-4 ">
               <figure>
@@ -200,7 +217,6 @@ function App() {
             </div>
           </div>
         )}
-
         <form method="dialog" className="modal-backdrop">
           <button></button>
         </form>
