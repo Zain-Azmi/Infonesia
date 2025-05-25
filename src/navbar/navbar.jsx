@@ -21,9 +21,7 @@ function Navbar() {
             tabIndex={0}
             className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li
-              onClick={() => document.getElementById("my_modal_2").showModal()}
-            >
+            <li onClick={() => document.getElementById("Profil").showModal()}>
               <a>Profil</a>
             </li>
             <li>
@@ -32,10 +30,25 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          <dialog id="my_modal_2" className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Hello!</h3>
-              <p className="py-4">Press ESC key or click outside to close</p>
+          <dialog id="Profil" className="modal">
+            <div className="modal-box  w-xs">
+              <h3 className="font-bold text-lg">Profil</h3>
+              <div className="card bg-base-100 mt-4 ">
+                <div className="flex justify-center items-center">
+                  <img
+                    src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                    alt="Avatar"
+                    className="ring ring-success ring-offset-base-100 w-26 rounded-full ring-2 ring-offset-2"
+                  />
+                </div>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title">
+                    <p>Nama : Zain Azmi</p>
+                  </h2>
+                  <p>NIM : 2217020130</p>
+                  <p>Kelas : 6.SI.D</p>
+                </div>
+              </div>
             </div>
             <form method="dialog" className="modal-backdrop">
               <button>close</button>

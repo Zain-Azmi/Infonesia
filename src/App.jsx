@@ -6,7 +6,7 @@ function App() {
   const [DetailNegara, setDetailNegara] = useState(null);
   const JumlahNegaraPerHalaman = 20;
 
-  const fetchData = () => {
+  const ambilData = () => {
     axios
       .get("https://restcountries.com/v3.1/independent?status=true")
       .then((res) => {
@@ -16,7 +16,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData();
+    ambilData();
   }, []);
 
   const JumlahHalaman = Math.ceil(DataNegara.length / JumlahNegaraPerHalaman);
@@ -27,7 +27,13 @@ function App() {
   );
 
   const datadetail = (namanegara) => {
-    setDetailNegara(DataNegara.find((item) => item.name.common === namanegara));
+    setDetailNegara(null);
+    axios
+      .get(`https://restcountries.com/v3.1/translation/${namanegara}`)
+      .then((res) => {
+        setDetailNegara(res.data[0]);
+      })
+      .catch((err) => console.error("Gagal Mengambil Data Negara:", err));
   };
 
   return (
@@ -69,10 +75,10 @@ function App() {
           NegaraPerHalaman.map((item) => (
             <div
               onClick={() => {
-                datadetail(item.name.common);
+                datadetail(item.translations.ind.common);
                 document.getElementById("modaldetailnegara").showModal();
               }}
-              key={item.name.common}
+              key={item.translations.ind.common}
               className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
             >
               <figure>
