@@ -6,12 +6,14 @@ function App() {
   const [DetailNegara, setDetailNegara] = useState(null);
   const [InputSearch, setInputSearch] = useState("");
   const JumlahNegaraPerHalaman = 20;
+  const [Datasudahdiambil, setDatasudahdiambil] = useState(0);
 
   const ambilData = () => {
     axios
       .get("https://restcountries.com/v3.1/independent?status=true")
       .then((res) => {
         setDataNegara(res.data);
+        setDatasudahdiambil(1);
       })
       .catch((err) => console.error("Gagal Mengambil Data Negara:", err));
   };
@@ -50,6 +52,7 @@ function App() {
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
+            n
           >
             <g
               strokeLinejoin="round"
@@ -72,7 +75,7 @@ function App() {
         </label>
       </div>
       <div className="flex flex-wrap justify-center gap-4 mb-4">
-        {NegaraPerHalaman.length === 0 ? (
+        {Datasudahdiambil === 0 ? (
           <div className="flex flex-wrap gap-4 justify-center mb-4">
             {Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
               <div key={i} className="flex w-80 flex-col gap-4">
@@ -83,7 +86,7 @@ function App() {
               </div>
             ))}
           </div>
-        ) : (
+        ) : NegaraPerHalaman.length > 0 ? (
           NegaraPerHalaman.map((item) => (
             <div
               onClick={() => {
@@ -113,6 +116,8 @@ function App() {
               </div>
             </div>
           ))
+        ) : (
+          <p>Tidak Ada Negara Dengan Nama {InputSearch}</p>
         )}
       </div>
       <br />
@@ -172,51 +177,63 @@ function App() {
         </div>
       </div>
       <dialog id="modaldetailnegara" className="modal">
-        {DetailNegara && (
-          <div className="modal-box">
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <h3 className="font-bold text-lg">Informasi Negara</h3>
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Informasi Negara</h3>
+          {DetailNegara === null ? (
             <div className="card bg-base-100 mt-4 ">
-              <figure>
-                <img
-                  src={DetailNegara.flags.png}
-                  className="border-1 border-gray-300"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">
-                  <p>{DetailNegara.translations.ind.common}</p>
-                </h2>
-                <p>Nama Resmi: {DetailNegara.translations.ind.official}</p>
-                <p>
-                  Jumlah Populasi:{" "}
-                  {DetailNegara.population.toLocaleString("id-ID")} Jiwa
-                </p>
-                Letak Negara: {DetailNegara.region}, {DetailNegara.subregion}
-                <p>Ibu Kota: {DetailNegara.capital?.[0]}</p>
-                <p>
-                  Bahasa:{" "}
-                  {Object.values(DetailNegara.languages || {}).join(", ")}
-                </p>
-                <p>
-                  Mata Uang:{" "}
-                  {Object.values(DetailNegara.currencies || {})
-                    .map((cur) => `${cur.name} (${cur.symbol})`)
-                    .join(", ")}
-                </p>
-                <p>Zona Waktu: {DetailNegara.timezones?.join(", ")}</p>
-                <p>
-                  Luas Wilayah: {DetailNegara.area.toLocaleString("id-ID")} km²
-                </p>
-                <p>Kode Negara: {DetailNegara.cca2}</p>
+              <div className="flex flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
               </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <div className="card bg-base-100 mt-4 ">
+                <figure>
+                  <img
+                    src={DetailNegara.flags.png}
+                    className="border-1 border-gray-300"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">
+                    <p>{DetailNegara.translations.ind.common}</p>
+                  </h2>
+                  <p>Nama Resmi: {DetailNegara.translations.ind.official}</p>
+                  <p>
+                    Jumlah Populasi:{" "}
+                    {DetailNegara.population.toLocaleString("id-ID")} Jiwa
+                  </p>
+                  Letak Negara: {DetailNegara.region}, {DetailNegara.subregion}
+                  <p>Ibu Kota: {DetailNegara.capital?.[0]}</p>
+                  <p>
+                    Bahasa:{" "}
+                    {Object.values(DetailNegara.languages || {}).join(", ")}
+                  </p>
+                  <p>
+                    Mata Uang:{" "}
+                    {Object.values(DetailNegara.currencies || {})
+                      .map((cur) => `${cur.name} (${cur.symbol})`)
+                      .join(", ")}
+                  </p>
+                  <p>Zona Waktu: {DetailNegara.timezones?.join(", ")}</p>
+                  <p>
+                    Luas Wilayah: {DetailNegara.area.toLocaleString("id-ID")}{" "}
+                    km²
+                  </p>
+                  <p>Kode Negara: {DetailNegara.cca2}</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <form method="dialog" className="modal-backdrop">
           <button></button>
         </form>

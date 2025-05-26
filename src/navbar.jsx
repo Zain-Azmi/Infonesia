@@ -38,6 +38,7 @@ function Navbar() {
                 </button>
               </form>
               <h3 className="font-bold text-lg">Profil</h3>
+
               <div className="card bg-base-100 mt-4 ">
                 <div className="flex justify-center items-center">
                   <img
