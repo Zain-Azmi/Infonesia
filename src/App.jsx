@@ -24,21 +24,30 @@ function App() {
 
   const carinegara =
     InputSearch.trim() === ""
-      ? DataNegara.filter((item) => item.translations.ind?.common)
+      ? DataNegara.filter(
+          (item) => item.translations.ind?.common || item.name?.official
+        )
       : DataNegara.filter((item) => {
-          const nama = item.translations.ind?.common;
-          return nama && nama.toLowerCase().includes(InputSearch.toLowerCase());
+          const namaTerjemahan =
+            item.translations.ind?.common?.toLowerCase() || "";
+          const namaResmi = item.name?.official?.toLowerCase() || "";
+          const keyword = InputSearch.toLowerCase();
+
+          return (
+            namaTerjemahan.includes(keyword) || namaResmi.includes(keyword)
+          );
         });
+
   const JumlahHalaman = Math.ceil(carinegara.length / JumlahNegaraPerHalaman);
   const IDNegara = (HalamanAktif - 1) * JumlahNegaraPerHalaman;
   const NegaraPerHalaman = carinegara.slice(
     IDNegara,
     IDNegara + JumlahNegaraPerHalaman
   );
-  const datadetail = (namanegara) => {
+  const datadetail = (kodenegara) => {
     setDetailNegara(null);
     axios
-      .get(`https://restcountries.com/v3.1/translation/${namanegara}`)
+      .get(`https://restcountries.com/v3.1/alpha/${kodenegara}`)
       .then((res) => {
         setDetailNegara(res.data[0]);
       })
@@ -67,10 +76,13 @@ function App() {
           </svg>
           <input
             type="text"
-            placeholder="Cari Negara..."
+            placeholder="Cari Negara (Nama Lokal/Internasional)..."
             className="input w-xs focus:outline-none focus-within:outline-none"
             value={InputSearch}
-            onChange={(e) => setInputSearch(e.target.value)}
+            onChange={(e) => {
+              setInputSearch(e.target.value);
+              setHalamanAktif(1);
+            }}
           />
         </label>
       </div>
@@ -90,10 +102,10 @@ function App() {
           NegaraPerHalaman.map((item) => (
             <div
               onClick={() => {
-                datadetail(item.translations.ind.common);
+                datadetail(item.ccn3);
                 document.getElementById("modaldetailnegara").showModal();
               }}
-              key={item.translations.ind.common}
+              key={item.ccn3}
               className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
             >
               <figure>
@@ -206,7 +218,7 @@ function App() {
                   <h2 className="card-title">
                     <p>{DetailNegara.translations.ind.common}</p>
                   </h2>
-                  <p>Nama Resmi: {DetailNegara.translations.ind.official}</p>
+                  <p>Nama Resmi Internasional: {DetailNegara.name.official}</p>
                   <p>
                     Jumlah Populasi:{" "}
                     {DetailNegara.population.toLocaleString("id-ID")} Jiwa
