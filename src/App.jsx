@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Globe, Users, MapPin, DollarSign, Languages, X } from "lucide-react";
 import axios from "axios";
 function App() {
   const [DataNegara, setDataNegara] = useState([]);
@@ -7,6 +8,7 @@ function App() {
   const [InputSearch, setInputSearch] = useState("");
   const JumlahNegaraPerHalaman = 20;
   const [Datasudahdiambil, setDatasudahdiambil] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ambilData = () => {
     axios
@@ -103,10 +105,10 @@ function App() {
             <div
               onClick={() => {
                 datadetail(item.ccn3);
-                document.getElementById("modaldetailnegara").showModal();
+                setIsModalOpen(true);
               }}
               key={item.ccn3}
-              className="card bg-base-100 w-80 shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
+              className="card bg-base-100 w-xs shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
             >
               <figure>
                 <img
@@ -116,10 +118,11 @@ function App() {
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{item.translations.ind.common}</h2>
+                <h2 className="card-title">
+                  {item.translations.ind?.common || item.name.common}
+                </h2>
                 <p>
                   Jumlah Populasi: {item.population.toLocaleString("id-ID")}{" "}
-                  Jiwa
                 </p>
                 <p>
                   Letak Negara: {item.region}, {item.subregion}
@@ -130,11 +133,7 @@ function App() {
           ))
         ) : (
           <div className="flex flex-col items-center justify-center text-center mt-4">
-            <img
-              src="/bebek.gif"
-              alt="Bebek GIF"
-              className="w-32 h-auto mb-2"
-            />
+            <img src="/kucing.png" className="w-32 h-auto mb-2" />
             <p className="text-gray-700">
               Tidak ada negara dengan nama <strong>{InputSearch}</strong>
             </p>
@@ -197,68 +196,192 @@ function App() {
           )}
         </div>
       </div>
-      <dialog id="modaldetailnegara" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
+
+      {isModalOpen && DetailNegara && (
+        <div className="modal modal-open">
+          <div className="modal-box  w-3xl max-w-4xl">
+            <button
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <X className="w-4 h-4" />
             </button>
-          </form>
-          <h3 className="font-bold text-lg">Informasi Negara</h3>
-          {DetailNegara === null ? (
-            <div className="card bg-base-100 mt-4 ">
-              <div className="flex flex-col gap-4">
-                <div className="skeleton h-32 w-full"></div>
-                <div className="skeleton h-4 w-28"></div>
-                <div className="skeleton h-4 w-full"></div>
-                <div className="skeleton h-4 w-full"></div>
+
+            <div className="flex items-start gap-4 mb-6">
+              <img
+                src={DetailNegara.flags.png}
+                alt={`Bendera ${
+                  DetailNegara.translations.ind?.common ||
+                  DetailNegara.name?.official
+                }`}
+                className="w-24 h-16 object-cover rounded-lg border shadow-sm"
+              />
+              <div>
+                <h3 className="font-bold text-2xl">
+                  {DetailNegara.translations.ind?.common ||
+                    DetailNegara.name?.official}
+                </h3>
+                <p className="text-base-content/70">
+                  {DetailNegara.name.official}
+                </p>
               </div>
             </div>
-          ) : (
-            <div>
-              <div className="card bg-base-100 mt-4 ">
-                <figure>
-                  <img
-                    src={DetailNegara.flags.png}
-                    className="border-1 border-gray-300"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">
-                    <p>{DetailNegara.translations.ind.common}</p>
-                  </h2>
-                  <p>Nama Resmi Internasional: {DetailNegara.name.official}</p>
-                  <p>
-                    Jumlah Populasi:{" "}
-                    {DetailNegara.population.toLocaleString("id-ID")} Jiwa
-                  </p>
-                  Letak Negara: {DetailNegara.region}, {DetailNegara.subregion}
-                  <p>Ibu Kota: {DetailNegara.capital?.[0]}</p>
-                  <p>
-                    Bahasa:{" "}
-                    {Object.values(DetailNegara.languages || {}).join(", ")}
-                  </p>
-                  <p>
-                    Mata Uang:{" "}
-                    {Object.values(DetailNegara.currencies || {})
-                      .map((cur) => `${cur.name} (${cur.symbol})`)
-                      .join(", ")}
-                  </p>
-                  <p>Zona Waktu: {DetailNegara.timezones?.join(", ")}</p>
-                  <p>
-                    Luas Wilayah: {DetailNegara.area.toLocaleString("id-ID")}{" "}
-                    km²
-                  </p>
-                  <p>Kode Negara: {DetailNegara.cca2}</p>
+
+            <div className="divider"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h4 className="font-semibold text-lg border-b pb-2">
+                  Informasi Dasar
+                </h4>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-base-content/60" />
+                    <span className="font-medium">Ibukota:</span>
+                    <span>{DetailNegara.capital?.[0] || "Tidak ada"}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-base-content/60" />
+                    <span className="font-medium">Populasi:</span>
+                    <span>
+                      {DetailNegara.population.toLocaleString("id-ID")}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-base-content/60" />
+                    <span className="font-medium">Wilayah:</span>
+                    <div className="flex gap-2">
+                      <div className="badge badge-primary">
+                        {DetailNegara.region}
+                      </div>
+                      {DetailNegara.subregion && (
+                        <div className="badge badge-outline">
+                          {DetailNegara.subregion}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-base-content/60" />
+                    <span className="font-medium">Luas:</span>
+                    <span>{DetailNegara.area.toLocaleString("id-ID")} km²</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="font-semibold text-lg border-b pb-2">
+                  Informasi Tambahan
+                </h4>
+                <div className="space-y-3">
+                  {DetailNegara.currencies && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <DollarSign className="w-4 h-4 text-base-content/60" />
+                        <span className="font-medium">Mata Uang:</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 ml-6">
+                        {Object.values(DetailNegara.currencies).map(
+                          (currency, index) => (
+                            <div key={index} className="badge badge-outline">
+                              {currency.name} ({currency.symbol})
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {DetailNegara.languages && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Languages className="w-4 h-4 text-base-content/60" />
+                        <span className="font-medium">Bahasa:</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 ml-6">
+                        {Object.values(DetailNegara.languages).map(
+                          (language, index) => (
+                            <div key={index} className="badge badge-outline">
+                              {language}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Globe className="w-4 h-4 text-base-content/60" />
+                      <span className="font-medium">Zona Waktu:</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 ml-6">
+                      {DetailNegara.timezones
+                        .slice(0, 3)
+                        .map((timezone, index) => (
+                          <div
+                            key={index}
+                            className="badge badge-outline badge-sm"
+                          >
+                            {timezone}
+                          </div>
+                        ))}
+                      {DetailNegara.timezones.length > 3 && (
+                        <div className="badge badge-outline badge-sm">
+                          +{DetailNegara.timezones.length - 3} lainnya
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {DetailNegara.borders && DetailNegara.borders.length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin className="w-4 h-4 text-base-content/60" />
+                        <span className="font-medium">Negara Tetangga:</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 ml-6">
+                        {DetailNegara.borders
+                          .slice(0, 5)
+                          .map((border, index) => (
+                            <div
+                              key={index}
+                              className="badge badge-outline badge-sm"
+                            >
+                              {border}
+                            </div>
+                          ))}
+                        {DetailNegara.borders.length > 5 && (
+                          <div className="badge badge-outline badge-sm">
+                            +{DetailNegara.borders.length - 5} lainnya
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          )}
+
+            <div className="modal-action">
+              <button
+                className="btn btn-primary"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+          <div
+            className="modal-backdrop"
+            onClick={() => setIsModalOpen(false)}
+          ></div>
         </div>
-        <form method="dialog" className="modal-backdrop">
-          <button></button>
-        </form>
-      </dialog>
+      )}
     </>
   );
 }

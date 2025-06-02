@@ -3,7 +3,13 @@ function Navbar() {
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
         <a className="btn btn-ghost text-3xl">
-          <img src="/logo.png" className=" w-36 " />
+          <img
+            onClick={() => {
+              setHalamanAktif(1);
+            }}
+            src="/logo.png"
+            className=" w-36 "
+          />
         </a>
       </div>
       <div className="flex-none">
