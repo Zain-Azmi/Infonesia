@@ -1,14 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar.jsx";
 import InfoNegara from "./pages/infonegara.jsx";
+import ProfilPage from "./pages/profil.jsx";
+import Navbar from "./components/navbar.jsx";
+import ScrollButtons from "./components/scrollbuttons.jsx";
 
 function App() {
   return (
     <>
-      <Navbar></Navbar>
-      <Routes>
-        <Route path="/" element={<InfoNegara />} />
-      </Routes>
+      <Navbar />
+      <div>
+        <Routes>
+          <Route path="/" element={<InfoNegara />} />
+          <Route path="/profil" element={<ProfilPage />} />
+        </Routes>
+      </div>
+      <ScrollButtons />
     </>
   );
 }
