@@ -36,6 +36,7 @@ function CardNegara({
                   src={item.flags.png}
                   alt="Bendera"
                   className="w-full h-full object-fill"
+                  loading="lazy"
                 />
               </figure>
 
