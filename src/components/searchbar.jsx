@@ -1,6 +1,6 @@
 function SearchBar({ InputSearch, setInputSearch, setHalamanAktif }) {
   return (
-    <div className="flex justify-center items-center h-[150px]">
+    <div className="flex justify-center items-center h-[150px] px-2">
       <label className="focus:outline-none focus-within:outline-none input border-4 border-gray-300 rounded-full flex items-center focus:box-shadow-none  w-xs">
         <svg
           className="h-[1em] opacity-50"
@@ -22,7 +22,7 @@ function SearchBar({ InputSearch, setInputSearch, setHalamanAktif }) {
         <input
           type="text"
           placeholder="Cari Negara (Nama Lokal/Internasional)..."
-          className="input w-xs focus:outline-none focus-within:outline-none"
+          className="input w-xs  focus:outline-none focus-within:outline-none"
           value={InputSearch}
           onChange={(e) => {
             setInputSearch(e.target.value);

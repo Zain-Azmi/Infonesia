@@ -8,18 +8,19 @@ function CardNegara({
 }) {
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-4 mb-4">
+      <div className="flex flex-wrap justify-center gap-4 px-4">
         {Datasudahdiambil === 0 ? (
-          <div className="flex flex-wrap gap-4 justify-center mb-4">
-            {Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
-              <div key={i} className="flex w-80 flex-col gap-4">
-                <div className="skeleton h-32 w-full"></div>
-                <div className="skeleton h-4 w-28"></div>
-                <div className="skeleton h-4 w-full"></div>
-                <div className="skeleton h-4 w-full"></div>
-              </div>
-            ))}
-          </div>
+          Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
+            <div
+              key={i}
+              className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 flex flex-col gap-4"
+            >
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          ))
         ) : NegaraPerHalaman.length > 0 ? (
           NegaraPerHalaman.map((item) => (
             <div
@@ -28,21 +29,22 @@ function CardNegara({
                 setisModalOpen(true);
               }}
               key={item.ccn3}
-              className="card bg-base-100 w-xs shadow-sm border-1 border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
+              className="card w-full sm:w-1/2 md:w-1/4 lg:w-1/5 bg-base-100 shadow-sm border border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
             >
-              <figure>
+              <figure className="w-full aspect-[3/2] overflow-hidden border border-gray-300">
                 <img
                   src={item.flags.png}
-                  alt="Shoes"
-                  className="w-full h-[200px] object-cover border-1 border-gray-300"
+                  alt="Bendera"
+                  className="w-full h-full object-fill"
                 />
               </figure>
+
               <div className="card-body">
                 <h2 className="card-title">
                   {item.translations.ind?.common || item.name.common}
                 </h2>
                 <p>
-                  Jumlah Populasi: {item.population.toLocaleString("id-ID")}{" "}
+                  Jumlah Populasi: {item.population.toLocaleString("id-ID")}
                 </p>
                 <p>
                   Letak Negara: {item.region}, {item.subregion}

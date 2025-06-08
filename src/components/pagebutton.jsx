@@ -1,4 +1,4 @@
-function PageButton(HalamanAktif, JumlahHalaman, setHalamanAktif) {
+function PageButton({ HalamanAktif, JumlahHalaman, setHalamanAktif }) {
   return (
     <>
       <br />
