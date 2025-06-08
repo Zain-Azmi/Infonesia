@@ -6,7 +6,6 @@ function SearchBar({ InputSearch, setInputSearch, setHalamanAktif }) {
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          n
         >
           <g
             strokeLinejoin="round"

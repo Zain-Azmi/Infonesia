@@ -27,7 +27,6 @@ function InfoNegara() {
     Ambildetaildatanegara(kodenegara)
       .then((res) => {
         setDetailNegara(res.data[0]);
-        console.log(res.data[0]);
       })
       .catch((err) => console.error("Gagal Mengambil Data Negara:", err));
   };

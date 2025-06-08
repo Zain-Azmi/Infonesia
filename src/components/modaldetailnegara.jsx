@@ -8,7 +8,7 @@ function ModalDetailNegara({ isModalOpen, DetailNegara, setisModalOpen }) {
   return (
     <>
       <div className="modal modal-open">
-        <div className="modal-box w-[90%] max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl p-4">
+        <div className="modal-box w-[90%] max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl p-4 overflow-y-auto">
           <button
             className="btn btn-sm btn-circle absolute right-2 top-2"
             onClick={() => setisModalOpen(false)}

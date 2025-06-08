@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 function Navbar() {
+  const navigate = useNavigate();
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="sticky top-0 bg-white/95 z-50 navbar bg-base-100 shadow-sm mb-2">
       <div className="flex-1">
         <a className="btn btn-ghost text-3xl">
           <img
             onClick={() => {
-              setHalamanAktif(1);
+              navigate("/");
             }}
             src="/logo.png"
             className=" w-36 "
@@ -29,7 +31,11 @@ function Navbar() {
             tabIndex={0}
             className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li onClick={() => document.getElementById("Profil").showModal()}>
+            <li
+              onClick={() => {
+                navigate("/profil");
+              }}
+            >
               <a>Profil</a>
             </li>
             <li>
