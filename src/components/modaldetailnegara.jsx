@@ -7,7 +7,7 @@ function ModalDetailNegara({ isModalOpen, DetailNegara, setisModalOpen }) {
 
   return (
     <>
-      <div className="modal modal-open">
+      <div className="modal modal-open overflow-y-auto">
         <div className="modal-box w-[90%] max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl p-4 overflow-y-auto bg-white text-black">
           <button
             className="btn btn-sm btn-circle absolute right-2 top-2 bg-white text-black border-gray-300 hover:bg-gray-100 transition-colors duration-200"
@@ -44,7 +44,7 @@ function ModalDetailNegara({ isModalOpen, DetailNegara, setisModalOpen }) {
             <>
               <div className="flex flex-col sm:flex-row items-start gap-4 mb-6">
                 <img
-                  src={DetailNegara.flags.png}
+                  src={DetailNegara.flags.svg}
                   alt={`Bendera ${
                     DetailNegara.translations.ind?.common ||
                     DetailNegara.name?.official

@@ -33,9 +33,9 @@ function CardNegara({
             >
               <figure className="w-full aspect-[3/2] overflow-hidden border border-gray-300">
                 <img
-                  src={item.flags.png}
+                  src={item.flags.svg}
                   alt="Bendera"
-                  className="w-full h-full object-fill"
+                  className="w-full h-full object-cover"
                 />
               </figure>
 
