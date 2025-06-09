@@ -7,18 +7,18 @@ function CardNegara({
   NegaraPerHalaman,
 }) {
   return (
-    <>
-      <div className="flex flex-wrap justify-center gap-4 px-4">
+    <div className="bg-white">
+      <div className="flex flex-wrap justify-center gap-4 px-4 ">
         {Datasudahdiambil === 0 ? (
           Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
             <div
               key={i}
               className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 flex flex-col gap-4"
             >
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
+              <div className="h-32 w-full bg-gray-300 rounded"></div>
+              <div className="h-4 w-28 bg-gray-300 rounded"></div>
+              <div className="h-4 w-full bg-gray-300 rounded"></div>
+              <div className="h-4 w-full bg-gray-300 rounded"></div>
             </div>
           ))
         ) : NegaraPerHalaman.length > 0 ? (
@@ -29,7 +29,7 @@ function CardNegara({
                 setisModalOpen(true);
               }}
               key={item.ccn3}
-              className="card w-full sm:w-1/2 md:w-1/4 lg:w-1/5 bg-base-100 shadow-sm border border-gray-300 cursor-pointer hover:shadow-xl transition-shadow"
+              className="card w-full sm:w-1/2 md:w-1/4 lg:w-1/5 shadow-sm border border-gray-300 border-rounded cursor-pointer hover:shadow-xl transition-shadow"
             >
               <figure className="w-full aspect-[3/2] overflow-hidden border border-gray-300">
                 <img
@@ -39,7 +39,7 @@ function CardNegara({
                 />
               </figure>
 
-              <div className="card-body">
+              <div className="card-body bg-white text-black border border-gray-300 rounded-b-lg">
                 <h2 className="card-title">
                   {item.translations.ind?.common || item.name.common}
                 </h2>
@@ -62,7 +62,7 @@ function CardNegara({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

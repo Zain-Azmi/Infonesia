@@ -6,7 +6,7 @@ import ScrollButtons from "./components/scrollbuttons.jsx";
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <Navbar />
       <div>
         <Routes>
@@ -15,7 +15,7 @@ function App() {
         </Routes>
       </div>
       <ScrollButtons />
-    </>
+    </div>
   );
 }
 

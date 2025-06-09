@@ -63,21 +63,21 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="card bg-base-100 shadow-lg mb-8">
+          <div className="card bg-white text-black shadow-lg mb-8">
             <div className="card-body">
               <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="avatar">
-                  <div className="w-32 rounded-full ring ring-success ring-offset-base-100 ring-offset-2">
+                  <div className="w-32 rounded-full ring ring-success ring-2">
                     <img src="/bebek.gif" alt="Profile Picture" />
                   </div>
                 </div>
 
                 <div className="text-center md:text-left flex-1">
                   <h1 className="text-lg font-bold mb-2">Zain Azmi</h1>
-                  <p className="text-sm text-base-content/70 mb-4">
+                  <p className="text-sm text-content/70 mb-4">
                     Full Stack Developer
                   </p>
-                  <p className="text-sm text-base-content/80 leading-relaxed">
+                  <p className="text-sm text-content/80 leading-relaxed">
                     Seorang developer yang passionate dalam menciptakan aplikasi
                     web yang bermanfaat dan user-friendly. Saya senang
                     mengeksplorasi teknologi baru dan berbagi pengetahuan dengan
@@ -122,9 +122,9 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="card bg-base-100 shadow-lg">
+            <div className="card bg-white shadow-lg">
               <div className="card-body">
-                <h2 className="card-title text-lg mb-4">
+                <h2 className="card-title text-lg text-black mb-4">
                   <Code className="w-6 h-6" />
                   Keahlian Teknis
                 </h2>
@@ -138,7 +138,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="card bg-base-100 shadow-lg">
+            <div className="card bg-white text-black shadow-lg">
               <div className="card-body">
                 <h2 className="card-title text-lg mb-4">
                   <Star className="w-6 h-6" />
@@ -146,11 +146,13 @@ export default function AboutPage() {
                 </h2>
                 <div className="stats stats-vertical lg:stats-horizontal">
                   <div className="stat">
-                    <div className="stat-title">Proyek Selesai</div>
+                    <div className="stat-title text-gray-600 ">
+                      Proyek Selesai
+                    </div>
                     <div className="stat-value text-success">7+</div>
                   </div>
                   <div className="stat">
-                    <div className="stat-title">Pengalaman</div>
+                    <div className="stat-title text-gray-600">Pengalaman</div>
                     <div className="stat-value text-primary">3 Tahun</div>
                   </div>
                 </div>
@@ -158,7 +160,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="card bg-base-100 shadow-lg mt-8">
+          <div className="card bg-white text-black shadow-lg mt-8">
             <div className="card-body">
               <h2 className="card-title text-lg mb-6">
                 <Globe className="w-6 h-6" />
@@ -166,10 +168,12 @@ export default function AboutPage() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {projects.map((project, index) => (
-                  <div key={index} className="card bg-base-200 shadow-md">
+                  <div key={index} className="card bg-gray-100 shadow-md">
                     <div className="card-body p-4">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-bold text-sm">{project.name}</h3>
+                        <h3 className="font-bold text-black text-sm">
+                          {project.name}
+                        </h3>
                         <div
                           className={`badge ${
                             project.status === "Active"
@@ -182,7 +186,7 @@ export default function AboutPage() {
                           {project.status}
                         </div>
                       </div>
-                      <p className="text-sm text-base-content/70 mb-3">
+                      <p className="text-sm text-black text-content/70 mb-3">
                         {project.description}
                       </p>
                       <div className="flex flex-wrap gap-1">
@@ -202,14 +206,14 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="card bg-base-100 shadow-lg mt-8">
+          <div className="card bg-white shadow-lg mt-8">
             <div className="card-body">
-              <h2 className="card-title text-lg mb-4">
+              <h2 className="card-title text-black text-lg mb-4">
                 <Heart className="w-6 h-6" />
                 Tentang Website Ini
               </h2>
               <div className="prose max-w-none">
-                <p className="text-sm text-base-content/80 leading-relaxed mb-4">
+                <p className="text-sm text-black  text-content/80 leading-relaxed mb-4">
                   Website "Infonesia" ini dibuat dengan tujuan untuk menyediakan
                   informasi lengkap tentang negara-negara di seluruh dunia dalam
                   satu platform yang mudah digunakan.
@@ -217,8 +221,10 @@ export default function AboutPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                   <div>
-                    <h3 className="font-bold text-sm mb-2">🎯 Fitur Utama:</h3>
-                    <ul className="list-disc list-inside space-y-1 text-xs">
+                    <h3 className="font-bold text-sm text-black  mb-2">
+                      🎯 Fitur Utama:
+                    </h3>
+                    <ul className="list-disc list-inside space-y-1 text-black text-xs">
                       <li>Pencarian negara real-time</li>
                       <li>Informasi lengkap setiap negara</li>
                       <li>Modal detail yang informatif</li>
@@ -227,8 +233,10 @@ export default function AboutPage() {
                   </div>
 
                   <div>
-                    <h3 className="font-bold text-md mb-2">🛠️ Teknologi:</h3>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
+                    <h3 className="font-bold text-black text-md mb-2">
+                      🛠️ Teknologi:
+                    </h3>
+                    <ul className="list-disc list-inside space-y-1 text-sm text-black ">
                       <li>React</li>
                       <li>JavaScript</li>
                       <li>Tailwind CSS</li>

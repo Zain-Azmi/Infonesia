@@ -25,14 +25,14 @@ export default function ScrollButtons() {
       {showTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-18 right-4 btn btn-circle"
+          className="fixed bottom-18 right-4 btn btn-circle bg-white text-black border-gray-300 border-1 shadow-lg hover:bg-gray-100 transition-colors duration-200"
         >
           ▲
         </button>
       )}
       <button
         onClick={scrollToBottom}
-        className="fixed bottom-4 right-4 btn  btn-circle"
+        className="fixed bottom-4 right-4 btn  btn-circle bg-white text-black border-gray-300 border-1 shadow-lg hover:bg-gray-100 transition-colors duration-200"
       >
         ▼
       </button>

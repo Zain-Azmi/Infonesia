@@ -54,7 +54,7 @@ function InfoNegara() {
   );
 
   return (
-    <>
+    <div className="bg-white">
       <SearchBar
         InputSearch={InputSearch}
         setInputSearch={setInputSearch}
@@ -78,7 +78,7 @@ function InfoNegara() {
         DetailNegara={DetailNegara}
         setisModalOpen={setisModalOpen}
       />
-    </>
+    </div>
   );
 }
 

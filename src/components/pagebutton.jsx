@@ -2,23 +2,25 @@ function PageButton({ HalamanAktif, JumlahHalaman, setHalamanAktif }) {
   return (
     <>
       <br />
-      <div className="flex justify-center items-center">
-        <div className="join">
+      <div className="flex justify-center items-center ">
+        <div className="join bg-white border-none ">
           {HalamanAktif > 3 && (
             <>
               <button
                 onClick={() => setHalamanAktif(1)}
-                className="join-item btn"
+                className="join-item btn bg-white text-black border-gray-300 border-1"
               >
                 1
               </button>
               <button
                 onClick={() => setHalamanAktif(2)}
-                className="join-item btn"
+                className="join-item btn bg-white text-black border-gray-300 border-1"
               >
                 2
               </button>
-              <button className="join-item btn btn-disabled">...</button>
+              <button className="join-item btn btn-disabled bg-white text-black border-gray-300 border-1">
+                ...
+              </button>
             </>
           )}
 
@@ -30,7 +32,9 @@ function PageButton({ HalamanAktif, JumlahHalaman, setHalamanAktif }) {
                 key={NoHalaman}
                 onClick={() => setHalamanAktif(NoHalaman)}
                 className={`join-item btn ${
-                  HalamanAktif === NoHalaman ? "bg-blue-500 text-white" : ""
+                  HalamanAktif === NoHalaman
+                    ? "bg-blue-500 text-white border-gray-300 border-1"
+                    : "bg-white text-black border-gray-300 border-1"
                 }`}
               >
                 {NoHalaman}
@@ -40,16 +44,18 @@ function PageButton({ HalamanAktif, JumlahHalaman, setHalamanAktif }) {
 
           {HalamanAktif < JumlahHalaman - 2 && (
             <>
-              <button className="join-item btn btn-disabled">...</button>
+              <button className="join-item btn btn-disabled bg-white text-black border-gray-300 border-1">
+                ...
+              </button>
               <button
                 onClick={() => setHalamanAktif(JumlahHalaman - 1)}
-                className="join-item btn"
+                className="join-item btn bg-white text-black border-gray-300 border-1"
               >
                 {JumlahHalaman - 1}
               </button>
               <button
                 onClick={() => setHalamanAktif(JumlahHalaman)}
-                className="join-item btn"
+                className="join-item btn bg-white text-black border-gray-300 border-1"
               >
                 {JumlahHalaman}
               </button>
