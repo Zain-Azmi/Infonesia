@@ -86,13 +86,15 @@ export default function AboutPage() {
 
                   <div className="flex justify-center md:justify-start gap-4 mt-6">
                     <a
-                      href="https://github.com"
+                      href="https://github.com/Zain-Azmi"
+                      target="_blank"
                       className="btn btn-circle btn-outline"
                     >
                       <Github className="w-5 h-5" />
                     </a>
                     <a
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/zain-azmi-368723345/"
+                      target="_blank"
                       className="btn btn-circle btn-outline"
                     >
                       <Linkedin className="w-5 h-5" />
@@ -104,7 +106,8 @@ export default function AboutPage() {
                       <Mail className="w-5 h-5" />
                     </button>
                     <a
-                      href="https://portfolio.example.com"
+                      href="https://zain-azmi.vercel.app/"
+                      target="_blank"
                       className="btn btn-circle btn-outline"
                     >
                       <Globe className="w-5 h-5" />
