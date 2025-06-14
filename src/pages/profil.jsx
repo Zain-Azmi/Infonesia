@@ -17,7 +17,7 @@ export default function AboutPage() {
   const [isEmailCopied, setIsEmailCopied] = useState(false);
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("developer@example.com");
+    navigator.clipboard.writeText("zainazmi50@gmail.com");
     setIsEmailCopied(true);
     setTimeout(() => setIsEmailCopied(false), 2000);
   };
