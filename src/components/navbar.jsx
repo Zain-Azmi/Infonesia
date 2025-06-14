@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <div className="sticky top-0 bg-white/95 z-50 navbar bg-base-100 shadow-sm mb-2">
       <div className="flex-1">
-        <a className="btn btn-ghost text-3xl hover:bg-gray-100 transition-colors duration-200 border-none outline-none shadow-none">
+        <button className="btn btn-ghost text-3xl hover:bg-gray-100 transition-colors duration-200 border-none outline-none shadow-none">
           <img
             onClick={() => {
               navigate("/");
@@ -13,7 +13,7 @@ function Navbar() {
             alt="Logo Infonesia"
             className="w-36"
           />
-        </a>
+        </button>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
