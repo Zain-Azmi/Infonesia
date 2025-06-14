@@ -11,14 +11,15 @@ function CardNegara({
       <div className="flex flex-wrap justify-center gap-4 px-4 ">
         {Datasudahdiambil === 0 ? (
           Array.from({ length: JumlahNegaraPerHalaman }).map((_, i) => (
-            <div
-              key={i}
-              className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 flex flex-col gap-4"
-            >
-              <div className="h-32 w-full bg-gray-300 rounded"></div>
-              <div className="h-4 w-28 bg-gray-300 rounded"></div>
-              <div className="h-4 w-full bg-gray-300 rounded"></div>
-              <div className="h-4 w-full bg-gray-300 rounded"></div>
+            <div className="card w-full sm:w-1/2 md:w-1/4 lg:w-1/5 shadow-sm border border-gray-300 border-rounded cursor-pointer hover:shadow-xl transition-shadow">
+              <div className="w-full aspect-[3/2] bg-gray-300 rounded overflow-hidden border border-gray-300"></div>
+              <div className="card-body bg-white border border-gray-300 rounded-b-lg gap-3.5">
+                <p>{""}</p>
+                <div className="h-5 w-28 bg-gray-300 rounded"></div>
+                <div className="h-5 w-full bg-gray-300 rounded"></div>
+                <div className="h-5 w-full bg-gray-300 rounded"></div>
+                <div className="h-5 w-full bg-gray-300 rounded"></div>
+              </div>
             </div>
           ))
         ) : NegaraPerHalaman.length > 0 ? (
