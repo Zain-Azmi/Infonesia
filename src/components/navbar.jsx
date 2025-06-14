@@ -37,12 +37,15 @@ function Navbar() {
               }}
               className="hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 border-none outline-none shadow-none"
             >
-              <a>Profil</a>
+              <p>Profil</p>
             </li>
-            <li className="hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 border-none outline-none shadow-none">
-              <a href="https://restcountries.com/" target="_blank">
-                Sumber Data
-              </a>
+            <li
+              onClick={() =>
+                window.open("https://restcountries.com/", "_blank")
+              }
+              className="hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 border-none outline-none shadow-none"
+            >
+              <p>Sumber Data</p>
             </li>
           </ul>
           <dialog id="Profil" className="modal">
