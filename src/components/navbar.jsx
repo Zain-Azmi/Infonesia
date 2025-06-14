@@ -10,6 +10,7 @@ function Navbar() {
               navigate("/");
             }}
             src="/logo.png"
+            alt="Logo Infonesia"
             className="w-36"
           />
         </a>
